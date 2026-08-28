@@ -35,7 +35,7 @@ import { toast } from "sonner";
 type Locale = "ar" | "en";
 
 const assets = {
-  officialLogo: "/manus-storage/soudad-official-logo_05125311.png",
+  officialLogo: "/manus-storage/soudad-official-logo-transparent_f860e17c.png",
   symbol: "/manus-storage/soudad-symbol_75f29b2d.png",
   hero: "/manus-storage/soudad-hero-healthcare-supply_cef5f3be.jpg",
   compliance: "/manus-storage/soudad-compliance-detail_98c28824.jpg",
