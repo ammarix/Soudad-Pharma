@@ -35,11 +35,13 @@ import { toast } from "sonner";
 type Locale = "ar" | "en";
 
 const assets = {
+  officialLogo: "/manus-storage/soudad-official-logo_05125311.png",
   symbol: "/manus-storage/soudad-symbol_75f29b2d.png",
   hero: "/manus-storage/soudad-hero-healthcare-supply_cef5f3be.jpg",
   compliance: "/manus-storage/soudad-compliance-detail_98c28824.jpg",
   products: "/manus-storage/soudad-medical-products_29f1fcf7.jpg",
   logistics: "/manus-storage/soudad-logistics-network_00b72b95.jpg",
+  yemenMap: "/manus-storage/yemen-coverage-map_fef757f1.svg",
 };
 
 const copy = {
@@ -138,7 +140,6 @@ const copy = {
     submit: "إرسال الاستفسار",
     response: "نتعامل مع الاستفسارات باهتمام وسنعاود التواصل عبر البريد الرسمي.",
     finalTitle: "نرفع جودة التوريد الطبي، معاً.",
-    finalText: "ابدأ اليوم حواراً واضحاً حول شراكة موثوقة تخدم القطاع الصحي.",
     finalCta: "تواصل مع سؤدد فارما",
     footerText: "حلول دوائية وطبية موثوقة للقطاع الصحي.",
     legal: "تنويه: المعلومات الطبية والمنتجات تخضع للتراخيص واللوائح المعمول بها.",
@@ -240,7 +241,6 @@ const copy = {
     submit: "Send inquiry",
     response: "We review inquiries carefully and will follow up through the official email address.",
     finalTitle: "Together, we raise the standard of medical supply.",
-    finalText: "Start a focused conversation on a trusted partnership serving healthcare.",
     finalCta: "Contact Soudad Pharma",
     footerText: "Trusted pharmaceutical and medical solutions for the healthcare sector.",
     legal: "Notice: Medical information and products remain subject to applicable licensing and regulation.",
@@ -258,14 +258,8 @@ const serviceIcons = {
 
 function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <a href="#home" className="brand-mark" aria-label="Soudad Pharma">
-      <img src={assets.symbol} alt="" className="brand-symbol" />
-      {!compact && (
-        <span className="brand-type">
-          <strong>SOUDAD PHARMA</strong>
-          <small>MEDICAL SUPPLIES</small>
-        </span>
-      )}
+    <a href="#home" className={`brand-mark official-brand ${compact ? "brand-compact" : ""}`} aria-label="Soudad Pharma">
+      <img src={assets.officialLogo} alt="Soudad Pharma Medical Supplies" className="official-logo" />
     </a>
   );
 }
@@ -440,7 +434,7 @@ export default function Home() {
         <div className="operating-photo"><img src={assets.products} alt="" /><p className="operating-caption"><span>04</span>{t.operatingCaption}</p></div>
         <div className="operating-content">
           <p className="eyebrow eyebrow-light"><span />{t.whyKicker}</p>
-          <h2>{t.whyTitle}</h2>
+          <h2 className="operating-title">{isAr ? <>الالتزام لا يكون وعداً؛<br className="mobile-title-break" /> بل نظام عمل.</> : t.whyTitle}</h2>
           <p className="body-copy body-copy-light">{t.whyBody}</p>
           <div className="strength-list">
             {t.whyItems.map(([title, description], index) => (
@@ -490,15 +484,17 @@ export default function Home() {
             <p>{t.reachBody}</p>
             <div className="reach-badge"><MapPin size={17} /><span>{t.reachBadge}</span></div>
           </div>
-          <div className="network-diagram" aria-label={t.reachBadge}>
-            <div className="network-core"><img src={assets.symbol} alt="" /></div>
-            <span className="network-node node-a"><i /></span>
-            <span className="network-node node-b"><i /></span>
-            <span className="network-node node-c"><i /></span>
-            <span className="network-node node-d"><i /></span>
-            <svg viewBox="0 0 500 365" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M250 180 C190 106, 120 85, 64 58 M250 180 C320 116, 381 102, 430 87 M250 180 C176 222, 118 263, 71 314 M250 180 C334 229, 379 268, 434 308" />
-            </svg>
+          <div className="coverage-map-panel" aria-label={t.reachBadge}>
+            <div className="coverage-map-head"><span><i />{isAr ? "نقاط الانتشار" : "Coverage points"}</span><b>{isAr ? "اليمن" : "YEMEN"}</b></div>
+            <div className="yemen-map-visual">
+              <img src={assets.yemenMap} alt={isAr ? "خريطة اليمن مع نقاط انتشار سؤدد فارما" : "Yemen map with Soudad Pharma coverage points"} />
+              <span className="map-marker map-sanaa"><i /><b>{isAr ? "صنعاء" : "Sana'a"}</b></span>
+              <span className="map-marker map-hodeidah"><i /><b>{isAr ? "الحديدة" : "Hodeidah"}</b></span>
+              <span className="map-marker map-taiz"><i /><b>{isAr ? "تعز" : "Taiz"}</b></span>
+              <span className="map-marker map-aden"><i /><b>{isAr ? "عدن" : "Aden"}</b></span>
+              <span className="map-marker map-hadramout"><i /><b>{isAr ? "حضرموت" : "Hadramout"}</b></span>
+            </div>
+            <p className="coverage-map-note"><span><Check size={13} /></span>{isAr ? "تغطية لوجستية مرنة للمراكز والمحافظات الرئيسية." : "Responsive logistics coverage for key centers and governorates."}</p>
           </div>
         </div>
         <div className="reach-note"><span><Check size={15} /></span>{t.reachNote}</div>
@@ -534,7 +530,7 @@ export default function Home() {
 
       <section className="final-cta">
         <div className="final-route" aria-hidden="true"><span /><span /><i /></div>
-        <div><p>{t.finalText}</p><h2>{t.finalTitle}</h2></div>
+        <div><h2>{t.finalTitle}</h2></div>
         <a href="mailto:info@soudadpharma.com" className="button button-white"><span>{t.finalCta}</span><ArrowUpLeft size={18} /></a>
       </section>
 
