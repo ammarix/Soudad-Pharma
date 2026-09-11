@@ -34,14 +34,15 @@ import { toast } from "sonner";
 
 type Locale = "ar" | "en";
 
+const assetBase = import.meta.env.BASE_URL;
 const assets = {
-  officialLogo: "/manus-storage/soudad-official-logo-transparent_f860e17c.png",
-  symbol: "/manus-storage/soudad-symbol_75f29b2d.png",
-  hero: "/manus-storage/soudad-hero-healthcare-supply_cef5f3be.jpg",
-  compliance: "/manus-storage/soudad-compliance-detail_98c28824.jpg",
-  products: "/manus-storage/soudad-medical-products_29f1fcf7.jpg",
-  logistics: "/manus-storage/soudad-logistics-network_00b72b95.jpg",
-  yemenMap: "/manus-storage/yemen-coverage-map_fef757f1.svg",
+  officialLogo: `${assetBase}assets/soudad-official-logo.png`,
+  symbol: `${assetBase}assets/soudad-symbol.png`,
+  hero: `${assetBase}assets/soudad-hero-healthcare-supply.jpg`,
+  compliance: `${assetBase}assets/soudad-compliance-detail.jpg`,
+  products: `${assetBase}assets/soudad-medical-products.jpg`,
+  logistics: `${assetBase}assets/soudad-logistics-network.jpg`,
+  yemenMap: `${assetBase}assets/yemen-coverage-map.svg`,
 };
 
 const copy = {
